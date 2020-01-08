@@ -1,0 +1,26 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion project.compileSdkVersion.toInteger()
+
+    defaultConfig {
+        minSdkVersion project.minSdkVersion.toInteger()
+        targetSdkVersion  project.targetSdkVersion.toInteger()
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation "junit:junit:$junitVersion"
+    implementation "androidx.core:core-ktx:$androidKTXVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation project(path: ':business')
+}
+repositories {
+    mavenCentral()
+}

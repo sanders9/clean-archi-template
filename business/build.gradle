@@ -1,0 +1,35 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion project.compileSdkVersion.toInteger()
+
+
+    defaultConfig {
+        minSdkVersion project.minSdkVersion.toInteger()
+        targetSdkVersion project.targetSdkVersion.toInteger()
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation "junit:junit:$junitVersion"
+
+    androidTestImplementation "android.arch.core:core-testing:$androidArchVersion"
+
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
+
+    //To avoid : Failed to transform artifact 'objenesis.jar  MethodHandle.invoke and MethodHandle.invokeExact are only supported starting with Android O (--min-api 26)
+    api ("io.mockk:mockk:$mockkVersion"){exclude module: 'objenesis'}
+    api 'org.objenesis:objenesis:2.6'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "androidx.annotation:annotation:$androidXVersion"
+}
